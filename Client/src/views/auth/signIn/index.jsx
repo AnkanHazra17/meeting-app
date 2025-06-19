@@ -20,18 +20,18 @@ import {
 } from "@chakra-ui/react";
 
 // Custom components
-import DefaultAuth from "layouts/auth/Default";
+import DefaultAuth from "@/layouts/auth/Default";
 // Assets
 
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-import { postApi } from "services/api";
-import { loginSchema } from "schema";
+import { postApi } from "@/services/api";
+import { loginSchema } from "@/schema";
 import { toast } from "react-toastify";
-import Spinner from "components/spinner/Spinner";
+import Spinner from "@/components/spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchImage } from "../../../redux/slices/imageSlice";
-import { setUser } from "../../../redux/slices/localSlice";
+import { fetchImage } from "@/redux/slices/imageSlice";
+import { setUser } from "@/redux/slices/localSlice";
 
 function SignIn() {
   // Chakra color mode

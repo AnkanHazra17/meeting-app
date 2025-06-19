@@ -15,21 +15,21 @@ import {
 // Assets
 // Custom components
 import { ViewIcon } from "@chakra-ui/icons";
-import Card from "components/card/Card";
-import MiniStatistics from "components/card/MiniStatistics";
-import IconBox from "components/icons/IconBox";
-import { HSeparator } from "components/separator/Separator";
+import Card from "@/components/card/Card";
+// import MiniStatistics from "@/components/card/MiniStatistics";
+// import IconBox from "@/components/icons/IconBox";
+import { HSeparator } from "@/components/separator/Separator";
 import { useEffect, useState } from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import { MdAddTask, MdContacts, MdLeaderboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { getApi } from "services/api";
+import { getApi } from "@/services/api";
 import ReportChart from "../reports/components/reportChart";
-import Chart from "components/charts/LineChart.js";
-import { HasAccess } from "../../../redux/accessUtils";
-import PieChart from "components/charts/PieChart";
-import CountUpComponent from "../../../../src/components/countUpComponent/countUpComponent";
-import Spinner from 'components/spinner/Spinner';
+import Chart from "@/components/charts/LineChart.js";
+// import { HasAccess } from "../../../redux/accessUtils";
+// import PieChart from "@/components/charts/PieChart";
+// import CountUpComponent from "../../../../src/components/countUpComponent/countUpComponent";
+import Spinner from '@/components/spinner/Spinner';
 import { useSelector } from "react-redux";
 
 export default function UserReports() {
@@ -150,7 +150,7 @@ export default function UserReports() {
             value={findModuleData("Tasks")}
           />}
         {(contactsView?.create || contactsView?.update || contactsView?.delete || contactsView?.view) && (contactModule?.isActive) &&
-          < MiniStatistics
+          <MiniStatistics
             onClick={() => navigate("/contacts")}
             startContent={
               <IconBox

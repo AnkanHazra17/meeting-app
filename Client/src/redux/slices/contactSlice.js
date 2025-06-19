@@ -1,6 +1,7 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getApi } from 'services/api';
+import {getApi} from "@/services/api";
+
 
 export const fetchContactData = createAsyncThunk('fetchContactData', async () => {
     const user = JSON.parse(localStorage.getItem("user"));
