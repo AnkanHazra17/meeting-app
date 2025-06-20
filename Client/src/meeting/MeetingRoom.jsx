@@ -11,6 +11,7 @@ import Spinner from "@/components/spinner/Spinner";
 import {useNavigate} from "react-router-dom";
 import {FaUsers} from "react-icons/fa6";
 import EndCallButton from "@/meeting/EndCallButton";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 const layoutTypes = [
     {
@@ -91,6 +92,7 @@ function MeetingRoom(props) {
                 </button>
                 <EndCallButton />
             </div>
+
         </section>
 
     );
