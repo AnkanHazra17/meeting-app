@@ -1,30 +1,44 @@
 const {StreamClient} = require("@stream-io/node-sdk")
-const apiKey = process.env.STREAM_API_KEY;
-const secret = process.env.STREAM_SECRET_KEY;
+const User = require('../../model/schema/user')
 
-export function generateStreamToken (req, res) {
+async function generateStreamToken (req, res) {
     try{
-        const userId = req.params.id;
-        if(!userId){
-            res.status(400).json({ message: "Unauthorized" });
+        const user = req.user;
+        if(!user){
+            return res.status(400).json({ message: "Unauthorized" });
         }
 
+        const userDetails = await User.findOne({_id: user.userId})
+        if(!userDetails){
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const apiKey = process.env.STREAM_API_KEY;
+        const secret = process.env.STREAM_SECRET_KEY;
+
         if(!apiKey){
-            res.status(401).json({ message: "No API Key" });
+            return res.status(401).json({ message: "No API Key" });
         }
 
         if(!secret){
-            res.status(401).json({ message: "No Secret" });
+            return res.status(401).json({ message: "No Secret" });
         }
 
         const client = new StreamClient(apiKey, secret);
-        const exp = Math.round(new Date().getTime() / 1000) + 60 * 60;
 
-        const iat = Math.floor(Date.now() / 1000) - 60;
-        const token = client.generateCallToken(userId, exp, iat);
+        const expTime = Math.round(new Date().getTime() / 1000) + 60 * 60;
 
-        res.status(200).json({streamToken: token});
+        const issuedAt = Math.floor(Date.now() / 1000) - 60;
+        const token = client.generateUserToken({
+            user_id: userDetails._id,
+            exp: expTime,
+            validity_in_seconds: issuedAt,
+        });
+
+        return res.status(200).json({streamToken: token});
     }catch(err){
-        res.status(500).json({ err });
+        return res.status(500).json({ err });
     }
 }
+
+module.exports = {generateStreamToken};

@@ -4,6 +4,8 @@ import UserLayout from "./layouts/user";
 import AdminLayout from "./layouts/admin";
 import AuthLayout from "./layouts/auth";
 import React from "react";
+import StartMeeting from "@/meeting/StartMeeting";
+import MeetingLayout from "@/meeting/MeetingLayout";
 
 function App() {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -24,7 +26,8 @@ function App() {
                 ) : (
                     <Route path="/*" element={<AuthLayout />} />
                 )}
-                <Route path="/meeting" element={<p>Meeting</p>}></Route>
+                <Route path="/meeting" element={<StartMeeting/>}></Route>
+                <Route path="/meeting/:meetingId" element={<MeetingLayout/>}></Route>
             </Routes>
         </>
     );

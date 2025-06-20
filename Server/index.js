@@ -16,12 +16,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 // Set up CORS  
-app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from your frontend
-    methods: ['GET', 'POST'], // Allow only GET method
-    allowedHeaders: ['Authorization'], // Allow Authorization header
-    optionsSuccessStatus: 200 // Ensure preflight response status is 200
-}))
+app.use(cors())
 //API Routes
 app.use('/api', route);
 
